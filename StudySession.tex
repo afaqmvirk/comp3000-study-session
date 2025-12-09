@@ -140,16 +140,18 @@
 
 \question Define the terms system bus, device controller, and DMA controller.
 
-\fillwithlines{1.2in}
+\fillwithlines{1.4in}
 
-\question Explain the difference between multiprogramming and multiprocessing. Include what each term means, what hardware support is required, and an example scenario where each is useful.
+\question Explain the difference between multiprogramming and multiprocessing. Include what each term means and what hardware support is required.
 
-\fillwithlines{1.2in}
-
-\vspace{2cm}
+\fillwithlines{1.5in}
 
 
 \section*{Part 2 - Process Management (OSC Ch. 3-5)}
+
+\question List the common process states in a typical OS and give at least three pieces of information stored in the process control block (PCB).
+
+\fillwithlines{1.2in}
 
 \mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
   \choice It is possible to have concurrency \textbf{but not parallelism}.
@@ -165,6 +167,8 @@
 
 \fillwithlines{.5in}
 
+\newpage
+
 \mcquestion{Which of the following is shared between threads of the same process? Select all that apply.}
 {
   \choice integer and floating point registers
@@ -175,7 +179,7 @@
   \choice open files
 }
 
-\newpage
+
 
 \mcquestion{Under which of the following basic CPU scheduling policies is starvation possible? Select all that apply.}{
   \choice First-Come-First-Served (FCFS)
@@ -201,8 +205,45 @@
   \choice In a pure one-to-one threading model, creating a very large number of user threads may stress kernel resources and harm performance.
 }
 
-\mcquestion{Consider the following set of processes, with the length of the CPU burst time given in milliseconds:
+\question Compare anonymous pipes and message passing for inter-process communication. Name one advantage of each.
 
+
+\fillwithlines{1.5in}
+
+\newpage
+
+\question Explain processor affinity. Why might an OS keep a thread on the same CPU when possible?
+
+\fillwithlines{3cm}
+
+\question A system uses an SRT (Shortest Remaining Time) scheduler. Among processes with the 
+shortest remaining time, the earliest-arriving one is chosen.
+
+Three processes arrive: $P_0$, $P_1$, and $P_2$.  
+$P_0$ has a CPU burst of $4$ units,  
+$P_1$ has a burst of $(1 + y)$ units,  
+$P_2$ has a burst of $3$ units.  
+
+The processes arrive at times $0$, $2$, and $5$ (one process at each time).
+
+\begin{enumerate}
+    \item[(a)] Determine the arrival order of $P_0$, $P_1$, and $P_2$.
+    \item[(b)] Find the value of $y$ so that:
+
+
+
+\begin{itemize}
+  \item SRT produces the \textbf{same} schedule as FCFS.
+  \item The average response time of the three processes is \textbf{maximized}.
+\end{itemize}
+\end{enumerate}
+
+\textbf{Response time} is the time from arrival to first execution.
+
+
+
+\newpage
+\mcquestion{Consider the following set of processes, with the length of the CPU burst time given in milliseconds:
 \[
 \begin{array}{c|c|c}
 \text{Process} & \text{Burst Time} & \text{Priority} \\ \hline
@@ -224,33 +265,13 @@ Which of the following algorithms results in the minimum average waiting time (o
   \choice Round-Robin (quantum = 2)
 }
 
-\newpage
-
-\question A system uses an SRT (Shortest Remaining Time) scheduler. Among processes with the 
-shortest remaining time, the earliest-arriving one is chosen.
-
-Three processes arrive: $P_0$, $P_1$, and $P_2$.  
-$P_0$ has a CPU burst of $4$ units,  
-$P_1$ has a burst of $(1 + y)$ units,  
-$P_2$ has a burst of $3$ units.  
-
-The processes arrive at times $0$, $2$, and $5$ (one process at each time).
-
-\begin{enumerate}
-    \item[(a)] Determine the arrival order of $P_0$, $P_1$, and $P_2$.
-    \item[(b)] Find the value of $y$ so that:
-\end{enumerate}
 
 
 
-\begin{itemize}
-    \item SRT produces the \textbf{same} schedule as FCFS.
-    \item The average response time of the three processes is \textbf{maximized}.
-\end{itemize}
 
-\textbf{Response time} is the time from arrival to first execution.
 
-\vspace{5cm}
+
+\vspace{3cm}
 
 \section*{Part 3 - Process Syncronization (OSC Ch. 6-8)} 
 
