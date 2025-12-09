@@ -392,6 +392,41 @@ that eventually ends, showing resource acquisition and release at each step.
 
 \newpage
 
+\question In Peterson’s solution for two processes:
+
+\begin{verbatim}
+  do {
+    flag[i] = true;
+    turn = j;
+    while (flag[j] && turn == j)
+        ; // busy wait
+    // critical section
+    ...
+    flag[i] = false;
+    // remainder section
+} while (true);
+
+
+\end{verbatim}
+
+Explain how this ensures mutual exclusion and bounded waiting.
+
+\fillwithlines{2in}
+
+\question In the classic bounded producer–consumer problem with one buffer of size N:
+
+\begin{itemize}
+\item mutex protects the buffer.
+
+\item empty is a counting semaphore initialized to N.
+
+\item full is a counting semaphore initialized to 0.
+\end{itemize}
+
+(a) Why do producers call wait(empty) before inserting an item? \\
+(b) Why is it incorrect to remove mutex and only rely on empty/full?
+\fillwithlines{2in}
+\newpage
 
 
 
