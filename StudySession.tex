@@ -1,15 +1,10 @@
 \documentclass[11pt,letterpaper]{exam}
 
-%----------------------------
-% Encoding & Fonts (pdfLaTeX)
-%----------------------------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 
-%----------------------------
-% Page Layout & Formatting
-%----------------------------
+
 \usepackage[margin=1in]{geometry}
 \usepackage{tabularx}
 \usepackage{environ}
@@ -25,18 +20,11 @@
 \runningheadrule
 \firstpageheadrule
 
-\firstpageheader{Operating Systems}{Midterm Exam}{\today}
-\runningheader{Operating Systems}{Midterm Exam}{Page \thepage\ of \numpages}
+\firstpageheader{Operating Systems}{Study Session Practice Questions}{\today}
+\runningheader{Operating Systems}{Study Session Practice Questions}{Page \thepage\ of \numpages}
 \runningfooter{}{}{}
 
-% (All points-related commands removed)
 
-%----------------------------
-% Custom Environments & Commands
-%----------------------------
-
-% Multiple-choice question helper
-% Optional arg kept for backward compatibility but IGNORED
 \newcommand{\mcquestion}[3][]{%
   \question #2%
   \begin{choices}
@@ -44,7 +32,6 @@
   \end{choices}
 }
 
-% Multiple-choice question with square boxes instead of letter labels
 \newcommand{\mcboxquestion}[3][]{%
   \question #2%
   {%
@@ -57,7 +44,6 @@
 }
 
 
-% True/False (single statement with two checkboxes)
 \newcommand{\tfquestion}[2][]{%
   \question #2
   \begin{checkboxes}
@@ -66,12 +52,7 @@
   \end{checkboxes}
 }
 
-% Matching section environment
-% Uses two auto-wrapping columns (no overflow)
-% Usage:
-%   \begin{matching}
-%     \mitem{A}{Process}{1}{A program in execution}
-%   \end{matching}
+
 \NewEnviron{matching}{%
   \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X
                                >{\raggedright\arraybackslash}X@{}}
@@ -79,136 +60,50 @@
   \end{tabularx}
 }
 
-% Helper command for a row in matching
-% Left side: label + term, Right side: label + definition
+
 \newcommand{\mitem}[4]{%
   \textbf{#1.} #2 & \textbf{#3.} #4 \\[0.5em]
 }
 
-%-----------------------------------------
-% Banker's Algorithm: matrices on same line
-%-----------------------------------------
-\newcommand{\bankersMatrices}{%
-  \begin{center}
-  \begin{tabular}{ccc}
-    % Allocation
-    \begin{tabular}{c|ccc}
-      \multicolumn{4}{c}{\textbf{Allocation}} \\
-      \toprule
-      \textbf{P} & $R_1$ & $R_2$ & $R_3$ \\
-      \midrule
-      P0 &   &   &   \\
-      P1 &   &   &   \\
-      P2 &   &   &   \\
-      P3 &   &   &   \\
-      P4 &   &   &   \\
-      \bottomrule
-    \end{tabular}
-    &
-    % Max
-    \begin{tabular}{c|ccc}
-      \multicolumn{4}{c}{\textbf{Max}} \\
-      \toprule
-      \textbf{P} & $R_1$ & $R_2$ & $R_3$ \\
-      \midrule
-      P0 &   &   &   \\
-      P1 &   &   &   \\
-      P2 &   &   &   \\
-      P3 &   &   &   \\
-      P4 &   &   &   \\
-      \bottomrule
-    \end{tabular}
-    &
-    % Need
-    \begin{tabular}{c|ccc}
-      \multicolumn{4}{c}{\textbf{Need}} \\
-      \toprule
-      \textbf{P} & $R_1$ & $R_2$ & $R_3$ \\
-      \midrule
-      P0 &   &   &   \\
-      P1 &   &   &   \\
-      P2 &   &   &   \\
-      P3 &   &   &   \\
-      P4 &   &   &   \\
-      \bottomrule
-    \end{tabular}
-  \end{tabular}
-  \end{center}
-  \vspace{1em}
-}
-
-% Available vector (kept separate)
-\newcommand{\bankersAvailable}{%
-  \begin{center}
-  \textbf{Available Vector}\\[0.5em]
-  \begin{tabular}{c|ccc}
-    \toprule
-    & \textbf{$R_1$} & \textbf{$R_2$} & \textbf{$R_3$} \\
-    \midrule
-    Available &   &   &   \\
-    \bottomrule
-  \end{tabular}
-  \end{center}
-  \vspace{1em}
-}
-
-% Short answer space using exam's \fillwithlines, with variable number of lines
 \newcommand{\shortanswer}[3][1.0in]{%
   \question #3
   \vspace{0.5em}
   \fillwithlines{#1}
 }
 
-% Longer answer space
 \newcommand{\longanswer}[2][]{%
   \question #2
   \vspace{0.5em}
   \fillwithlines{2.0in}
 }
 
-%----------------------------
-% Exam Metadata
-%----------------------------
+
 \title{COMP 3000 Operating Systems}
 \author{Study Session Questions}
-\date{Date: \_\_\_/ \_\_\_/ \_\_\_}
 
-%=========================================================
+
 \begin{document}
-%=========================================================
+
 
 \maketitle
 
 \vspace{1em}
 
 \vspace{1em}
-\noindent\textbf{Instructions:}
-\begin{itemize}
-  \item Answer all questions.
-  \item Show all work for partial credit where appropriate.
-  \item No electronic devices allowed.
-\end{itemize}
 
-% (gradetable removed)
-
-%=========================================================
 \newpage
 \begin{questions}
-%=========================================================
 
-%----------------------------
-% Part A: Multiple Choice
-%----------------------------
+
 \section*{Part 1 - Overview (OSC Ch. 1-2)}
 
-
-\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
-  \choice An interrupt is ignored if another interrupt is currently being handled.
-  \choice It's possible for two devices to each generate interrupts at the same time.
-  \choice Division by zero always causes an interrupt.
-  \choice All interrupts are generated only by hardware devices.
-  \choice Disabling interrupts guarantees mutual exclusion on all systems.
-  \choice A system call is an example of a software interrupt.
+\mcquestion{Which of the following statements are true? Select all that apply. You may also want to justify your choice behing each decision.}{
+\choice Every interrupt necessarily causes a context switch from \textbf{one user process to a different user process.}
+\choice Direct Memory Access (DMA) allows a device to read/write main memory \textbf{without CPU involvement for each transferred word}, but the CPU is still notified when the transfer completes.
+\choice The primary reason to have a separate kernel mode is \textbf{performance}, not protection.
+\choice On a single-core CPU, it is \textbf{impossible to have parallelism but still possible to have concurrency}.
+\choice Microkernel designs generally achieve lower syscall latency than monolithic kernels because they move most services to user space.
+\choice In a layered OS design, a higher layer should not directly invoke services of a non-adjacent lower layer.
 }
 
 \mcboxquestion{Place the steps of interrupt handling in the correct order, from the beginning. (1, 2, 3, 4)}{%
@@ -225,7 +120,10 @@
   \choice Main memory
 }
 
-\question What is the main difference between an exception and an interrupt?
+
+
+
+\question Explain the differences between a hardware interrupt, a trap (system call), and an exception.
 
 \fillwithlines{.5in}
 
@@ -240,20 +138,22 @@
 }
 
 
-\question Describe three primary functions of an operating system (what does it do?)
+\question Define the terms system bus, device controller, and DMA controller.
 
 \fillwithlines{1.2in}
 
-%----------------------------
-% Part B: Matching
-%----------------------------
+\question Explain the difference between multiprogramming and multiprocessing. Include what each term means, what hardware support is required, and an example scenario where each is useful.
 
-\newpage
+\fillwithlines{1.2in}
+
+\vspace{2cm}
+
+
 \section*{Part 2 - Process Management (OSC Ch. 3-5)}
 
 \mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
   \choice It is possible to have concurrency \textbf{but not parallelism}.
-  \choice Threads within the same process share the same \textbf{address space}.
+  \choice Threads within the same process access the same \textbf{address space}.
   \choice The \textbf{Ready} queue contains processes that are waiting for I/O to complete.
   \choice In preemptive priority scheduling, starvation of low-priority processes is \textbf{impossible}.
   \choice A race condition occurs when the correctness of a program depends on the relative timing of threads.
@@ -275,6 +175,8 @@
   \choice open files
 }
 
+\newpage
+
 \mcquestion{Under which of the following basic CPU scheduling policies is starvation possible? Select all that apply.}{
   \choice First-Come-First-Served (FCFS)
   \choice Shortest-Job-First (SJF)
@@ -291,7 +193,14 @@
 
 \fillwithlines{.5in}
 
-\newpage
+
+\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
+  \choice With a many-to-one threading model (many user threads mapped to one kernel thread), blocking on a single system call may block all user threads in that process.
+  \choice Adding more cores \textbf{always} decreases execution time for a multithreaded program, as long as there is no I/O.
+  \choice Round-Robin scheduling is preemptive because it forces a context switch after each time quantum, even if the running process has not blocked or terminated.
+  \choice In a pure one-to-one threading model, creating a very large number of user threads may stress kernel resources and harm performance.
+}
+
 \mcquestion{Consider the following set of processes, with the length of the CPU burst time given in milliseconds:
 
 \[
@@ -314,8 +223,6 @@ Which of the following algorithms results in the minimum average waiting time (o
   \choice Non-preemptive Priority (with a larger priority number implying a higher priority)
   \choice Round-Robin (quantum = 2)
 }
-
-Use the space below to justify your solution.
 
 \newpage
 
@@ -343,10 +250,8 @@ The processes arrive at times $0$, $2$, and $5$ (one process at each time).
 
 \textbf{Response time} is the time from arrival to first execution.
 
-\newpage
-%----------------------------
-% Part C: Banker's Algorithm Tables
-%----------------------------
+\vspace{5cm}
+
 \section*{Part 3 - Process Syncronization (OSC Ch. 6-8)} 
 
 
@@ -359,6 +264,15 @@ The processes arrive at times $0$, $2$, and $5$ (one process at each time).
   \mitem{C}{Progress}{3}{Only one process may be in its critical section.}
 \end{matching}
 
+
+\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
+\choice A binary semaphore can always be used as a mutex, but a mutex cannot always be used as a general counting semaphore.
+\choice In a readers–writers lock with reader priority, it is possible for writers to starve even when there is only a single writer repeatedly requesting access.
+\choice If a system’s resource-allocation graph contains a cycle, the system is definitely in a deadlocked state.
+\choice Deadlock avoidance (e.g., Banker's algorithm) can sometimes deny a resource request even though granting it would not immediately guarantee deadlock.
+\choice Deadlock detection algorithms \textbf{must} know the maximum resource demand of each process to function correctly.
+}
+\newpage
 \question (a) How could one PREVENT deadlock in the situation shown below using deadlock prevention techniques discussed in class?
 
 \begin{center}
@@ -367,11 +281,60 @@ The processes arrive at times $0$, $2$, and $5$ (one process at each time).
   {\parbox{0.5\linewidth}{\centering\small Four buses blocking each other at the Alexander Klellands Plass intersection in Oslo, Norway. Photo dated 24 November 2025.}}
 \end{center}
 
-\fillwithlines{2in}
+\fillwithlines{1.6in}
+
+
 
 (b) Provide another (non-operating-system-related) example of deadlock.
 
-\fillwithlines{1.5in}
+\fillwithlines{1.2in}
+
+
+\question
+Given the state below, determine whether the system is in a safe state. 
+If it is safe, provide a safe sequence.
+
+
+\begin{center}
+  \begin{tabular}{ccc}
+    % Allocation
+    \begin{tabular}{c|ccc}
+      \multicolumn{4}{c}{\textbf{Allocation}} \\
+      \toprule
+      \textbf{P} & $R_1$ & $R_2$ & $R_3$ \\
+      \midrule
+      P0 & 2  & 4  & 3  \\
+      P1 &  0 & 1  & 1  \\
+      P2 &  5 & 0  & 2  \\
+      \bottomrule
+    \end{tabular}
+    &
+    % Max
+    \begin{tabular}{c|ccc}
+      \multicolumn{4}{c}{\textbf{Max}} \\
+      \toprule
+      \textbf{P} & $R_1$ & $R_2$ & $R_3$ \\
+      \midrule
+      P0 & 3  & 2  & 4  \\
+      P1 & 1  & 4  & 3  \\
+      P2 & 2  & 0  & 0  \\
+      \bottomrule
+    \end{tabular}
+    &
+    % Need
+    \begin{tabular}{ccc}
+      \multicolumn{3}{c}{\textbf{Available}} \\
+      \toprule
+       $R_1$ & $R_2$ & $R_3$ \\
+      \midrule
+       2  & 1  & 2  \\
+      \bottomrule
+    \end{tabular}
+  \end{tabular}
+  \end{center}
+
+  \fillwithlines{0.5in}
+
 
 \newpage
 
@@ -392,7 +355,7 @@ The processes arrive at times $0$, $2$, and $5$ (one process at each time).
   \end{itemize}
 \end{itemize}
 
-(a) Draw the resource allocation graph for this system. Use the style of diagram from the lecture notes.
+(a) Draw the resource allocation graph for this system.
 
 
 (b) What is the state (runnable, waiting) of each process? For each process that is waiting, indicate what it
@@ -402,24 +365,25 @@ is waiting for.
 (c) Is this system deadlocked? If so, state which processes are involved. If not, give an execution sequence
 that eventually ends, showing resource acquisition and release at each step.
 
-\newpage
+\vspace{9cm}
 
-
-
-\question
-Given the state below, determine whether the system is in a safe state. 
-If it is safe, provide a safe sequence.
-
-
-\bankersMatrices
-
-\bankersAvailable
-
-
+\fillwithlines{2in}
 
 \newpage
+
+
+
 
 \section*{Part 4 - Memory Management (OSC Ch. 9-10)}
+
+
+\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
+\choice Paging eliminates both internal and external fragmentation.
+\choice Multi-level paging trades higher address translation overhead for lower page-table memory usage.
+\choice LRU page replacement can be approximated using a single reference bit per page and a circular scan (clock algorithm).
+\choice If a process’s working set does not fit into memory, increasing the degree of multiprogramming will usually reduce thrashing/the \# of page faults.}
+
+
 
 \question Under what conditions might two or more processes share common physical frames? Explain how and why this would be done.
 
@@ -469,18 +433,147 @@ tables for this process?
 
 \fillwithlines{0.5in}
 
+\question Assume that a program has just referenced an address in virtual memory. Describe a scenario in which each of the following can occur. (If no such scenario can occur, explain why.)
+
+(a) TLB miss with no page fault
+
+\fillwithlines{0.5in}
+
+(b) TLB miss with page fault
+
+\fillwithlines{0.5in}
+
+(c) TLB hit with no page fault
+
+\fillwithlines{0.5in}
+
+(d) TLB hit with page fault
+
+\fillwithlines{0.5in}
+
+\newpage
 
 \section*{Part 5 - Storage Management (OSC Ch. 11-12)}
 
-% (You can add a custom multi-T/F macro here if you’d like)
+\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
+\choice SCAN disk scheduling guarantees less total head movement than FCFS for every possible request pattern.
+\choice SSD/NVM devices have smaller benefit from seek-optimizing algorithms than HDDs because they have no mechanical heads to move.
+\choice For HDDs, logical block addresses (LBAs) are conceptually arranged in order across the disk, even if the controller hides the exact physical layout.
+\choice An OS can improve swap performance by spreading swap space across multiple devices instead of putting all swap on a single disk.
+}
 
-%----------------------------
-% Part F: Short Answer
-%----------------------------
-\section*{Part 6 - File System (OSC Ch. 13-15)}
+\question Match each I/O style to the most accurate definition.
+
+\begin{matching}
+  \mitem{A}{Blocking I/O}{1}{A single system call reads from or writes to multiple user buffers in one operation. \\}
+  \mitem{B}{Non-blocking I/O}{2}{The system call does not return until the requested I/O has completed or an error occurs. \\}
+  \mitem{C}{Asynchronous I/O}{3}{The kernel starts the I/O and returns immediately; completion is reported later (e.g., via signal, callback, or completion queue) so the caller does not need to poll.}
+  \mitem{D}{Vectored I/O}{4}{The system call returns immediately; if the operation would block, it fails (e.g., with ``would block''), and the caller must retry or use readiness notification.}
+\end{matching}
+
+\question
+Suppose that a disk drive has 8{,}000 cylinders, numbered from 0 to 7{,}999.
+The drive is currently serving a request at cylinder 3{,}400, and the previous
+request was at cylinder 3{,}000. The queue of pending requests, in FIFO order, is:
+\[
+120,\; 3{,}760,\; 1{,}550,\; 720,\; 4{,}090,\; 2{,}780,\; 510,\; 3{,}900.
+\]
+
+Starting from the current head position, what is the total distance (in cylinders)
+that the disk arm moves to satisfy all the pending requests for each of the
+following disk-scheduling algorithms?
+
+\begin{parts}
+  \part FCFS
+  \part SCAN
+  \part C-SCAN
+\end{parts}
+
+\newpage
+
+\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
+\choice I/O protection is enforced partly by marking I/O instructions as privileged and by protecting memory-mapped device registers from direct user access.
+
+\choice Spooling is used when a device can handle multiple concurrent requests in parallel, so the kernel can overlap operations from different processes.
+
+\choice The kernel’s error handling may retry transient I/O errors and can decide to stop using a device that exhibits too many correctable errors.
+
+\choice The kernel’s device-status table tracks the state of each I/O device so drivers and the kernel can coordinate ongoing operations.
+}
+
+\question
+Consider the following I/O scenarios on a multitasking workstation:
+\begin{parts}
+  \part A USB keyboard used with a text editor and graphical terminal.
+  \part A network printer shared by many users, connected over Ethernet.
+  \part An SSD that stores the operating system and user home directories.
+  \part An audio output device (sound card) playing compressed music or video sound, using DMA.
+\end{parts}
+
+For each scenario, would you design the operating system to use buffering, spooling, caching, or some combination?
 
 
-\section*{Part 8 - Virtual Machines (OSC Ch. 18)}
+Briefly justify your choices.
+
+
+\fillwithlines{5in}
+
+\newpage
+
+\section*{Part 6 - File System (OSC Ch. 13-14)}
+
+
+\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
+\choice Sequential file access requires the hardware to support sequential-only disks; the OS cannot simulate sequential access on random-access devices.
+\choice Direct (random) access to a file is commonly implemented using relative block numbers so the OS can choose where to place blocks on disk.
+\choice In a two-level directory scheme, all users share a single directory without separation, which avoids name collisions between users and supports hierarchical grouping of their files.
+\choice The OS understands the meaning of file extensions like \texttt{.c} or \texttt{.docx} and uses them to decide how to interpret file contents.
+\choice In an acyclic-graph directory, a file or subdirectory may have multiple names (aliases), which can lead to dangling references if one alias is deleted.
+\choice General graph directory structures must use additional mechanisms, such as forbidding links to directories or running cycle detection, to avoid cycles.
+}
+
+\question Explain how directory structures (flat, two-level, tree, acyclic, graph) affect usability, protection, and sharing. Give an example scenario where each structure would be particularly convenient or problematic.
+
+\fillwithlines{2.5in}
+
+
+\question Explain the main differences between using FSCK and using journaling for crash recovery. Under what circumstances might you still run FSCK on a journaling file system?
+
+\fillwithlines{2in}
+
+\mcquestion{Which of the following statements are true? \textbf{Select all that apply.}}{%
+\choice In FAT-based allocation, the file’s directory entry stores pointers to all its data blocks directly, so the FAT table is only used for free-space management.
+\choice Unix inodes combine several direct block pointers with one or more levels of indirect pointers to efficiently support both small and large files.
+\choice A unified buffer cache avoids double-caching by using a single cache for both page-based memory-mapped I/O and traditional file system I/O.
+\choice Synchronous writes always go through the buffer cache and can be delayed there for performance, as long as metadata remains consistent.
+\choice In write-ahead logging, metadata changes are written to their home locations first, and only afterwards are they recorded in the journal.
+\choice Because a journal log is finite, most journaling file systems treat it as a circular buffer and eventually reuse old log space.
+
+}
+
+\question Match each file allocation method with the description that best fits its behavior and trade-offs.
+
+\begin{matching}
+  \mitem{A}{Contiguous allocation}{1}{The file system records only a starting position and a length for each file. Accessing the $k$-th block is very fast once the start is known, but accommodating file growth may require relocating the file or adding special ``extension'' regions, and free space can become fragmented over time.}
+  \mitem{B}{Linked allocation}{2}{Each block used by a file contains extra metadata that tells the system where to find another block of the same file. Files can easily grow one block at a time without moving existing data, and free space can be used in small pieces, but jumping directly to the $k$-th block may require visiting many other blocks first.}
+  \mitem{C}{Indexed allocation}{3}{Information about where a file's blocks live is collected in a separate structure that stores many block references together. This allows the system to compute the location of the $k$-th block with one or a few lookups, even if blocks are scattered, but it consumes additional space for that structure and may be wasteful for very small files.}
+\end{matching}
+
+
+
+\question
+Consider a file system that uses inodes to represent files. Disk blocks are
+2\,KB in size, and a pointer to a disk block requires 4 bytes. Each inode
+contains 6 direct block pointers, as well as one single-indirect and one
+double-indirect block pointer. A \emph{single-indirect} pointer refers to a
+block that contains only block pointers, and a \emph{double-indirect} pointer
+refers to a block that contains pointers to such single-indirect blocks.
+
+What is the maximum size of a file that can be stored in this file system?
+
+\vspace{3cm}
+
+
 
 \end{questions}
 
