@@ -750,8 +750,8 @@ Given: Current position = 3400, Previous = 3000 (moving upward), Queue: 120, 376
 \begin{align*}
 \text{Distance} &= |3400-120| + |120-3760| + |3760-1550| + |1550-720| \\
 &\quad + |720-4090| + |4090-2780| + |2780-510| + |510-3900| \\
-&= 3280 + 3640 + 2210 + 830 + 3370 + 1310 + 2268 + 3390 \\
-&= 18,488 \text{ cylinders}
+&= 3280 + 3640 + 2210 + 830 + 3370 + 1310 + 2270 + 3390 \\
+&= 20,300 \text{ cylinders}
 \end{align*}
 
 \textbf{SCAN:} Head moving upward. Order: 3400 → 3760 → 3900 → 4090 → 7999 (end) → 2780 → 1550 → 720 → 510 → 120 → 0
@@ -760,7 +760,7 @@ Given: Current position = 3400, Previous = 3000 (moving upward), Queue: 120, 376
 &\quad + |7999-2780| + |2780-1550| + |1550-720| + |720-510| \\
 &\quad + |510-120| + |120-0| \\
 &= 360 + 140 + 190 + 3909 + 5219 + 1230 + 830 + 210 + 390 + 120 \\
-&= 12,599 \text{ cylinders}
+&= 12,598 \text{ cylinders}
 \end{align*}
 
 \textbf{C-SCAN:} Head moving upward. Order: 3400 → 3760 → 3900 → 4090 → 7999 → 0 → 120 → 510 → 720 → 1550 → 2780
@@ -769,7 +769,7 @@ Given: Current position = 3400, Previous = 3000 (moving upward), Queue: 120, 376
 &\quad + |7999-0| + |0-120| + |120-510| + |510-720| + |720-1550| \\
 &\quad + |1550-2780| \\
 &= 360 + 140 + 190 + 3909 + 7999 + 120 + 390 + 210 + 830 + 1230 \\
-&= 15,388 \text{ cylinders}
+&= 15,378 \text{ cylinders}
 \end{align*}
 }
 
@@ -805,13 +805,13 @@ For each scenario, would you design the operating system to use buffering, spool
 Briefly justify your choices.
 
 \answer{
-\textbf{(a) USB keyboard:} The operating system should use \textbf{buffering} only for a USB keyboard. Keyboard input arrives character-by-character as the user types, and buffering is necessary to handle the mismatch between the variable typing speed of the user and the processing speed of the system. The buffer collects keystrokes so that the system can process them in batches rather than handling each keystroke individually. No spooling is needed because a keyboard is an input device, not an output device that requires queuing. Minimal caching is appropriate because keyboard input requires low latency—users expect immediate response to their keystrokes, and caching would introduce unnecessary delay.
+\textbf{(a) USB keyboard:} The operating system should use \textbf{buffering} only for a USB keyboard. Keyboard input arrives character-by-character as the user types, and buffering is necessary to handle the mismatch between the variable typing speed of the user and the processing speed of the system. The buffer collects keystrokes so that the system can process them in batches rather than handling each keystroke individually. No spooling is needed because a keyboard is an input device, not an output device that requires queuing.
 
 \textbf{(b) Network printer:} The operating system should use \textbf{spooling} primarily, plus buffering for a network printer. A printer is a slow, sequential output device that can only handle one print job at a time. Spooling allows multiple users to submit print jobs immediately by storing them in a queue (spool), while the printer processes them one at a time. This prevents users from having to wait for the printer to become available. Buffering is also needed to handle network packet assembly, as print data arrives in network packets that must be reassembled into complete print jobs before being sent to the printer.
 
 \textbf{(c) SSD storage:} The operating system should use \textbf{caching} primarily, plus buffering for an SSD that stores the operating system and user files. Caching is essential because frequently accessed files and blocks can be kept in memory, dramatically reducing the number of disk I/O operations and improving performance. Since SSDs are faster than traditional hard drives but still slower than RAM, caching provides significant benefits. Buffering is used for write operations to batch multiple small writes together, reducing the number of write operations to the SSD and improving write efficiency.
 
-\textbf{(d) Audio output with DMA:} The operating system should use \textbf{buffering} primarily for an audio output device playing compressed music or video sound. Audio playback requires a continuous, uninterrupted stream of data to prevent audio dropouts or glitches. Buffering ensures smooth playback by maintaining a queue of audio data ahead of the current playback position, so that even if there are temporary delays in reading or decompressing data, playback can continue smoothly. DMA handles the actual transfer of audio data to the sound card, but buffering prevents underruns (when the buffer runs empty). Minimal caching is appropriate because audio data is typically streamed sequentially and not reaccessed, so caching would provide little benefit.
+\textbf{(d) Audio output with DMA:} The operating system should use \textbf{buffering} primarily for an audio output device playing compressed music or video sound. Audio playback requires a continuous, uninterrupted stream of data to prevent audio dropouts or glitches. Buffering ensures smooth playback by maintaining a queue of audio data ahead of the current playback position, so that even if there are temporary delays in reading or decompressing data, playback can continue smoothly. DMA handles the actual transfer of audio data to the sound card, but buffering prevents underruns (when the buffer runs empty)..
 }
 
 \newpage
@@ -928,7 +928,7 @@ What is the maximum size of a file that can be stored in this file system?
 
 \textbf{Step 3: Single-indirect}
 \begin{itemize}
-    \item 1 block containing 512 pointers → 512 data blocks
+    \item 1 block containing 512 pointers $\implies$ 512 data blocks
     \item Single-indirect capacity = 512 × 2048 = 1,048,576 bytes
 \end{itemize}
 
